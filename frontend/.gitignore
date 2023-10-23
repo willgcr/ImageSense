@@ -1,0 +1,8 @@
+.env
+.env.backup
+package-lock.json
+npm-debug.log
+yarn-error.log
+/dist
+/node_modules
+/.vscode
