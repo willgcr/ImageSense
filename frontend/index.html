@@ -11,7 +11,7 @@
 	<meta property="og:type" content="website">
 	<meta property="og:locale" content="en_US">
 	<meta property="og:description" content="Using a pre-trained Machine Learning model, users can select specific parts of an image, initiating a process that generates a basic image description. The frontend, built with React.js, empowers users to crop and process images seamlessly. The backend, a Python Flask app, utilizes a versatile machine learning model (Vit + GPT2) for image description, with the flexibility to replace it with other processing models.">
-	<meta property="og:image" content="img/logo.jpg">
+	<meta property="og:image" content="">
 	<!-- End of Open Graph -->
 	<!-- Twitter Card -->
 	<meta name="twitter:title" content="ImageSense">
@@ -20,18 +20,19 @@
 	<meta name="twitter:image" content="">
 	<!-- End of Twitter Card -->
 	<link rel="icon" type="image/x-icon" href="src/img/favicon.png">
-	<link rel="canonical" href="">
+	<link rel="canonical" href="https://willgcr.me/imagesense">
+	<base href="/imagesense/">
 	<!-- Google Analytics -->
-	<!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','GTM-WQFGB8H');</script>-->
+	})(window,document,'script','dataLayer','GTM-WQFGB8H');</script>
 	<!-- End of Google Analytics -->
 </head>
 <body class="bg-[#1e1d1f] text-white">
 	<!-- Google Analytics -->
-	<!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQFGB8H" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQFGB8H" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<div id="root"></div>
 	<script type="module" src="src/main.jsx"></script>
 </body>

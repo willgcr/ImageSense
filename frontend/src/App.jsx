@@ -10,7 +10,7 @@ const App = () => {
 	const [lang, setLang] = useState (localStorage.getItem ('language') || 'en');
 	return (
 		<LanguageContext.Provider value={{ lang, setLang }}>
-			<BrowserRouter>
+			<BrowserRouter basename="/imagesense">
 				<div className="flex flex-col h-screen w-screen items-center justify-center">
 					<Navbar/>
 					<Routes>

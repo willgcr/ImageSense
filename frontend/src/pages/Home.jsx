@@ -58,7 +58,14 @@ const Home = () => {
 		setModelResult (null);
 	}
 
-	if (modelResult != null) {
+	if (navigator.maxTouchPoints !== 0 || window.innerWidth <= 768) {
+		return (
+			<div className="flex flex-col w-full h-full justify-center items-center p-10">
+				Device not supported!
+			</div>
+		)
+
+	} else if (modelResult != null) {
 		return (
 			<div className="flex flex-col w-full h-full justify-center items-center p-10">
 			<div className="p-3">Model result:</div>
