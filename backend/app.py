@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from transformers import VisionEncoderDecoderModel, ViTImageProcessor, AutoTokenizer
@@ -6,16 +7,18 @@ import torch
 from PIL import Image, UnidentifiedImageError
 from io import BytesIO
 import logging
-from logging.handlers import RotatingFileHandler  # Import RotatingFileHandler
+from logging.handlers import RotatingFileHandler
 import warnings
+import secrets
 
 # Ignore all warnings
 warnings.simplefilter ("ignore")
 
 app = Flask (__name__)
+CORS(app)  # This will enable CORS for all routes
 
 # Set a secret key for session security
-app.secret_key = "0c3ad3149f9e2102d7cb9f4a1d18d9c980d093d0098c7769b6f88b5509b75941"
+app.secret_key = secrets.token_hex (32)
 
 # Load pre-trained models and tokenizer
 model = VisionEncoderDecoderModel.from_pretrained ("nlpconnect/vit-gpt2-image-captioning")
@@ -72,40 +75,39 @@ def predict_step (images):
 	return preds
 
 # Route for generating captions with rate limiting
-@app.route ("/", methods=["POST"])
+@app.route ("/", methods=["POST", "GET"])
 @limiter.limit ("60 per minute")
 def generate_caption ():
-	# Check if the request has a file in the "image" field
-	if "image" not in request.files:
-		return jsonify ({"error": "No image provided"}), 400
+	if request.method == "POST":
+		# Check if the request has a file in the "image" field
+		if "image" not in request.files:
+			return jsonify ({"error": "No image provided"}), 400
+		
+		uploaded_file = request.files["image"]
+		
+		if uploaded_file.filename == "":
+			return jsonify ({"error": "No image file selected"}), 400
+		# Read the image into memory as bytes
+		image_bytes = BytesIO (uploaded_file.read ())
+		# Check if the image size is greater than 10MB
+		if len (image_bytes.getvalue ()) > 10 * 1024 * 1024:
+			return jsonify ({"error": "Image size exceeds 10MB limit"}), 400
+		try:
+			# Process the image
+			processed_image = process_image (image_bytes)
+			# Make predictions
+			output = predict_step ([processed_image])
+			# Return only the caption in the response
+			return jsonify ({"result": output[0]})
+		except ValueError as e:
+			return jsonify ({"error": str (e)}), 400
+		except Exception as e:
+			logging.error (f"Error processing image: {str (e)}")
+			return jsonify ({"error": "Internal server error"}), 500
+	elif request.method == "GET":
+		return jsonify({"message": "Welcome to ImageSense!"})
 
-	uploaded_file = request.files["image"]
-
-	if uploaded_file.filename == "":
-		return jsonify ({"error": "No image file selected"}), 400
-
-	# Read the image into memory as bytes
-	image_bytes = BytesIO (uploaded_file.read ())
-
-	# Check if the image size is greater than 10MB
-	if len (image_bytes.getvalue ()) > 10 * 1024 * 1024:
-		return jsonify ({"error": "Image size exceeds 10MB limit"}), 400
-
-	try:
-		# Process the image
-		processed_image = process_image (image_bytes)
-
-		# Make predictions
-		output = predict_step ([processed_image])
-
-		# Return only the caption in the response
-		return jsonify ({"caption": output[0]})
-	except ValueError as e:
-		return jsonify ({"error": str (e)}), 400
-	except Exception as e:
-		logging.error (f"Error processing image: {str (e)}")
-		return jsonify ({"error": "Internal server error"}), 500
 
 # Run the application
 if __name__ == "__main__":
-	app.run (debug=False)
+	app.run (debug = False)

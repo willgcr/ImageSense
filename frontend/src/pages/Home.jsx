@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import ImageCropper from "../components/ImageCropper";
 import ImageProcessor from "../components/ImageProcessor";
+import parse from "html-react-parser";
+import __, { LangSelector } from "/src/lang";
 
 const Home = () => {
 	// The model result
@@ -46,12 +48,30 @@ const Home = () => {
 	}
 
 	const handleModelResult = (data) => {
-		console.log (data);
+		if (data && data) {
+			setModelResult (data);
+		}
+	}
+
+	const resetApp = () => {
+		setSelectionData (null);
+		setModelResult (null);
 	}
 
 	if (modelResult != null) {
-		return ('model output');
-
+		return (
+			<div className="flex flex-col w-full h-full justify-center items-center p-10">
+			<div className="p-3">Model result:</div>
+			<div className="flex bg-black p-4 rounded w-full h-[300px] sm:h-[350px] max-w-[750px] border-2 border-gray-500 overflow-y-auto">
+				<pre className="flex text-white font-mono text-xs whitespace-pre-wrap">
+					<code className="flex flex-wrap w-full ">
+						{JSON.stringify (modelResult, null, 4)}
+					</code>
+				</pre>
+			</div>
+			<button onClick={resetApp} className="flex items-center justify-center mt-4 bg-[#d35400] text-white py-2 px-4 rounded">{__('Restart')}</button>
+			</div>
+		);
 	} else if (selectionData == null || selectionData.height < 16 || selectionData.width < 16) {
 		return (
 			<div className="flex flex-col w-full h-full items-center justify-center">

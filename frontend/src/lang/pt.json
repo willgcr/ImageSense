@@ -7,5 +7,7 @@
 	"WIDTH": "LARGURA",
 	"HEIGHT": "ALTURA",
 	"User Selected Crop (original)": "Corte Selecionado (original)",
-	"Mouse Coordinates": "Coordenadas do Mouse"
+	"Mouse Coordinates": "Coordenadas do Mouse",
+	"Transmitting data to the server... This may take a moment, please be patient.": "Enviando dados para o servidor... Isso pode levar um momento, por favor, aguarde.",
+	"Restart": "reiniciar"
 }

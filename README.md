@@ -4,7 +4,7 @@ ImageSense is a versatile prototype application designed for image analysis usin
 
 ## Overview
 
-- **Demo:** Explore a functional demo version of the application hosted on a personal server. [**CHECK IT OUT HERE**](#)
+- **Demo:** Explore a functional demo version of the application hosted on a personal server. [**Check it out here!**](https://willgcr.me/imagesense)
 
 - **Frontend:**
   - Developed with React.js.
@@ -26,8 +26,10 @@ ImageSense is a versatile prototype application designed for image analysis usin
 
 - **Deployment:**
   - Frontend hosted on my personal server.
-  - Backend hosted on [Google Cloud Platform Compute Engine](https://cloud.google.com/compute), adaptable to any available Virtual Machine, and managed using Supervisor and Gunicorn.
+  - Backend hosted on [Google Cloud Platform Compute Engine](https://cloud.google.com/compute), adaptable to any available Virtual Machine.
   - The Flask app runs using Supervisor and Gunicorn. Configuration details are available in the deployment environment and are not provided here for simplicity.
+  - Nginx is utilized as a reverse proxy to route external traffic to the Gunicorn server.
+
 
 ## Credits
 

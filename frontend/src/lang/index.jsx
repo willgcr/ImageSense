@@ -4,11 +4,11 @@ import _pt from "./pt.json";
 export const LanguageContext = createContext ();
 
 export const LangSelector = () => {
-	const { lang, set_lang } = useContext (LanguageContext);
+	const { lang, setLang } = useContext (LanguageContext);
 	const update_lang = (e) => {
 		let new_lang = e.target.value;
 		localStorage.setItem ('language', new_lang);
-		set_lang (new_lang);
+		setLang (new_lang);
 	}
 	return (
 		<div className="flex px-5 items-center justify-center">
@@ -20,14 +20,14 @@ export const LangSelector = () => {
 	);
 }
 
-const __ = (_str) => {
-	const { lang, set_lang } = useContext (LanguageContext);
+const __ = (text) => {
+	const { lang, setLang } = useContext (LanguageContext);
 	if (lang == "pt") {
 		// Return translated
-		return _pt[_str]??_str;
+		return _pt[text]??text;
 	} else {
 		// Return default
-		return (_str);
+		return (text);
 	}
 }
 
