@@ -175,9 +175,8 @@ const ImageCropper = (props) => {
 
 	return (
 		<div className="flex flex-col w-full h-full justify-center items-center p-10">
-			
+			{/* <div className="text-xs py-4">Facing issues running the model? Please attempt to access and enable HTTPS at <a className="italic underline text-[#16a085]" target="_blank" href="https://35.209.131.159">https://35.209.131.159</a></div> */}
 			{/* Display the selected image */}
-			
 			{imageDataUri ? (
 				<div className="relative" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
 					<img src={imageDataUri} onMouseMove={handleMouseMove} onDragStart={handleDragStart} className="flex w-full max-w-[700px] max-h-[400px] border-2 border-gray-500 border-dashed rounded-2xl object-contain" ref={imageRef}/>

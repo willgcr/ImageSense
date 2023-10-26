@@ -32,7 +32,7 @@ const ImageProcessor = (props) => {
 				const formData = new FormData ();
 				formData.append ("image", blob, "image.jpg");
 				// Make a POST request using Fetch API
-				const response = await fetch ("http://35.209.131.159/", {
+				const response = await fetch ("https://imagesense.cloud/", {
 					method: "POST",
 					body: formData
 				});
