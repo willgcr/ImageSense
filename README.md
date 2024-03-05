@@ -4,7 +4,7 @@ ImageSense is a versatile prototype application designed for image analysis usin
 
 ## Overview
 
-- **Demo:** Explore a functional demo version of the application hosted on my personal server. [**Check it out here!**](https://willgcr.me/imagesense)
+- ~~**Demo:** Explore a functional demo version of the application hosted on my personal server. [**Check it out here!**](https://willgcr.me/imagesense)~~ (Not available anymore!)
 
 - **Frontend:**
   - Developed with React.js.
